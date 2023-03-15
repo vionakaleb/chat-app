@@ -3,20 +3,21 @@ import {useNavigate} from "react-router-dom"
 import { AiOutlineClose, AiOutlineArrowLeft } from "react-icons/ai";
 import moment from 'moment';
 
-const ChatBody = ({messages, typingStatus, lastMessageRef, socket}) => { 
+const ChatBody = ({messages, messageData, typingStatus, lastMessageRef, socket}) => { 
   const navigate = useNavigate()
-  
   const [users, setUsers] = useState([])
 
-    useEffect(()=> {
-        socket.on("newUserResponse", data => setUsers(data))
-    }, [socket, users])
+  useEffect(()=> {
+      socket.on("newUserResponse", data => setUsers(data))
+  }, [socket, users])
 
   const handleLeaveChat = () => {
     localStorage.removeItem("userName")
     navigate("/")
     window.location.reload()
   }
+
+  const randomColor = Math.floor(Math.random()*16777215).toString(16);
   
   return (
     <>
@@ -28,9 +29,11 @@ const ChatBody = ({messages, typingStatus, lastMessageRef, socket}) => {
           <div className='text-[#2F80ED] text-[15px] mb-[9px]'>
               {users?.length > 0 
                 ? users.map(user => <label key={user.socketID}>{users?.length > 1 ? `${user.userName}, ` : user.userName}</label>)
+                : messageData?.data?.length > 0 
+                ? messageData?.data?.map(user => <label key={user.id}>{`${user.owner.firstName}, `}</label>)
                 :<label>User</label>}
           </div>
-          <h4 className='text-[#333333] text-[10px]'>{users?.length > 1 ? `${users?.length} Participants` : `${users?.length} Participant`}</h4>
+          <h4 className='text-[#333333] text-[10px]'>{users?.length > 1 ? `${users?.length} Participants` : `${messageData?.data?.length} Participants`}</h4>
         </div>
         <button className='cursor-pointer' onClick={handleLeaveChat}>
           <AiOutlineClose className='w-[14px]' />
@@ -38,7 +41,8 @@ const ChatBody = ({messages, typingStatus, lastMessageRef, socket}) => {
       </header>
 
       <div className='message__container'>
-        {messages.map(message => (
+        {messages?.length > 0 
+        ? messages.map(message => (
           message.name === localStorage.getItem("userName") ? (
             <div className="message__chats" key={message.id}>
               <p className='sender__name !text-[#9B51E0]'>You</p>
@@ -56,7 +60,17 @@ const ChatBody = ({messages, typingStatus, lastMessageRef, socket}) => {
               </div>
             </div>
           )
-          ))}
+          ))
+          : messageData?.data?.map(message => (
+              <div className="message__chats" key={message.id}>
+                <p className='capitalize !text-[#E5A443]'>{message.owner.firstName}</p>
+                <div className={`message__recipient !rounded !bg-[#FCEED3]`}>
+                    <p className='!text-[#4F4F4F] !text-[12px] mb-[12px]'>{message.text}</p>
+                    <p className='!text-[#4F4F4F] !text-[9px]'>{moment(message.timestamp).format('HH:mm')}</p>
+                </div>
+              </div>
+            ))
+        }
 
         <div className='message__status'>
           <p>{typingStatus}</p>

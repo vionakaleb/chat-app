@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react'
 
-const ChatBar = ({messages, typingStatus, lastMessageRef, socket}) => {
+const ChatBar = ({messages, messageData, typingStatus, lastMessageRef, socket}) => {
     const [users, setUsers] = useState([])
     const [search, setSearch] = useState("")
 
@@ -27,9 +27,12 @@ const ChatBar = ({messages, typingStatus, lastMessageRef, socket}) => {
             </form>
         </div>
         <div>
-            <h4  className='chat__header'>{users?.length > 1 ? `${users?.length} Participants` : `${users?.length} Participant`}</h4>
+            <h4  className='chat__header'>{users?.length > 0 ? `${users?.length} Participants` :  `${messageData?.data?.length} Participants`}</h4>
             <div className='chat__users'>
-                {users.map(user => <p key={user.socketID}>{user.userName}</p>)}
+                {users?.length > 0 
+                ? users.map(user => <p key={user.socketID}>{user.userName}</p>)
+                : messageData?.data?.map(user => <p key={user.id}>{user.owner.firstName}</p>)
+            }
             </div>
         </div>
   </div>

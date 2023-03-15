@@ -2,11 +2,23 @@ import React, { useEffect, useState, useRef} from 'react'
 import ChatBar from './ChatBar'
 import ChatBody from './ChatBody'
 import ChatFooter from './ChatFooter'
+import { apiGetMessages } from '../api/message.api';
 
 const ChatPage = ({socket}) => { 
   const [messages, setMessages] = useState([])
   const [typingStatus, setTypingStatus] = useState("")
   const lastMessageRef = useRef(null);
+
+  const [messageData, setMessageData] = useState([])
+
+  const getMessages = async () => {
+    let res = await apiGetMessages();
+    setMessageData(res?.response?.data);
+  }
+
+  useEffect(()=> {
+    getMessages();
+  }, [messageData])
 
   useEffect(()=> {
     socket.on("messageResponse", data => setMessages([...messages, data]))
@@ -23,9 +35,9 @@ const ChatPage = ({socket}) => {
 
   return (
     <div className="chat">
-      <ChatBar messages={messages} typingStatus={typingStatus} lastMessageRef={lastMessageRef} socket={socket} />
+      <ChatBar messages={messages} messageData={messageData} typingStatus={typingStatus} lastMessageRef={lastMessageRef} socket={socket} />
       <div className='chat__main'>
-        <ChatBody messages={messages} typingStatus={typingStatus} lastMessageRef={lastMessageRef} socket={socket} />
+        <ChatBody messages={messages} messageData={messageData} typingStatus={typingStatus} lastMessageRef={lastMessageRef} socket={socket} />
         <ChatFooter socket={socket} />
       </div>
     </div>

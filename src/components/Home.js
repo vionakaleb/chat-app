@@ -13,12 +13,14 @@ const Home = ({socket}) => {
     }
   return (
     <form className='home__container' onSubmit={handleSubmit}>
+        <h1 className="!text-[#607EAA] text-[1.5rem] !mb-[1.5rem]">Chat App</h1>
+
         <label htmlFor="username">Username</label>
         <input type="text" 
         minLength={3} 
         name="username" 
         id='username'
-        className='username__input border-[1px] border-[solid] border-[#BDBDBD] !rounded' 
+        className='username__input border-[1px] border-[solid] border-[#BDBDBD] !rounded !mb-[1.5rem]' 
         value={userName} 
         onChange={e => setUserName(e.target.value)}
         />
