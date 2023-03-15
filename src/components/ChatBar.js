@@ -27,7 +27,7 @@ const ChatBar = ({messages, messageData, typingStatus, lastMessageRef, socket}) 
             </form>
         </div>
         <div>
-            <h4  className='chat__header'>{users?.length > 0 ? `${users?.length} Participants` :  `${messageData?.data?.length} Participants`}</h4>
+            <h4  className='chat__header'>{users?.length > 0 ? `${users?.length || 0} Participants` :  `${messageData?.data?.length || 0} Participants`}</h4>
             <div className='chat__users'>
                 {users?.length > 0 
                 ? users.map(user => <p key={user.socketID}>{user.userName}</p>)

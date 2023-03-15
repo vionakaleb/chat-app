@@ -33,7 +33,7 @@ const ChatBody = ({messages, messageData, typingStatus, lastMessageRef, socket})
                 ? messageData?.data?.map(user => <label key={user.id}>{`${user.owner.firstName}, `}</label>)
                 :<label>User</label>}
           </div>
-          <h4 className='text-[#333333] text-[10px]'>{users?.length > 1 ? `${users?.length} Participants` : `${messageData?.data?.length} Participants`}</h4>
+          <h4 className='text-[#333333] text-[10px]'>{users?.length > 1 ? `${users?.length || 0} Participants` : `${messageData?.data?.length || 0} Participants`}</h4>
         </div>
         <button className='cursor-pointer' onClick={handleLeaveChat}>
           <AiOutlineClose className='w-[14px]' />
