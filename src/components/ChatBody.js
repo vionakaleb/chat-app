@@ -5,11 +5,12 @@ import moment from 'moment';
 
 const ChatBody = ({messages, messageData, typingStatus, lastMessageRef, socket}) => { 
   const navigate = useNavigate()
-  const [users, setUsers] = useState([])
+  const [userData, setUserData] = useState([])
 
   useEffect(()=> {
-      socket.on("newUserResponse", data => setUsers(data))
-  }, [socket, users])
+      if (socket?.connected === true) socket.on("newUserResponse", data => setUserData(data));
+      else if (socket?.connected === false) setUserData(messageData?.data);
+  }, [messageData?.data, socket, userData])
 
   const handleLeaveChat = () => {
     localStorage.removeItem("userName")
@@ -27,13 +28,13 @@ const ChatBody = ({messages, messageData, typingStatus, lastMessageRef, socket})
         </button>
         <div className='flex-row !w-[100%] !ml-[1.2rem]'>
           <div className='text-[#2F80ED] text-[15px] mb-[9px]'>
-              {users?.length > 0 
-                ? users.map(user => <label key={user.socketID}>{users?.length > 1 ? `${user.userName}, ` : user.userName}</label>)
-                : messageData?.data?.length > 0 
-                ? messageData?.data?.map(user => <label key={user.id}>{`${user.owner.firstName}, `}</label>)
-                :<label>User</label>}
+              {userData?.length > 0 
+                ? userData?.map((user, id) => socket?.connected 
+                  ? <label key={id}>{userData?.length > 1 ? `${user.userName}, ` : user.userName}</label>
+                  : <label key={id}>{userData?.length > 1 ? `${user.owner.firstName}, ` : user.owner.firstName}</label>
+              ) : <label>User</label>}
           </div>
-          <h4 className='text-[#333333] text-[10px]'>{users?.length > 1 ? `${users?.length || 0} Participants` : `${messageData?.data?.length || 0} Participants`}</h4>
+          <h4 className='text-[#333333] text-[10px]'>{userData?.length > 0 && `${userData?.length || 0} Participants`}</h4>
         </div>
         <button className='cursor-pointer' onClick={handleLeaveChat}>
           <AiOutlineClose className='w-[14px]' />

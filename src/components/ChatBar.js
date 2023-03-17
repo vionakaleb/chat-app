@@ -1,18 +1,25 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState, useEffect, useCallback} from 'react'
 
 const ChatBar = ({messages, messageData, typingStatus, lastMessageRef, socket}) => {
-    const [users, setUsers] = useState([])
+    const [userData, setUserData] = useState([])
     const [search, setSearch] = useState("")
 
-    const handleSearch = (e) => {
+    const handleSearch = useCallback ((e) => {
         e.preventDefault()
         setSearch(e.target.value)
-    }
+    }, [])
 
     useEffect(()=> {
-        socket.on("newUserResponse", data => setUsers(data))
-    }, [socket, users])
-
+        if (search) {
+            const filteredData = userData?.filter((item) => socket?.connected 
+                ? item.userName.toLowerCase().includes(search.toLowerCase())
+                : item.owner.firstName.toLowerCase().includes(search.toLowerCase())
+            )
+            setUserData(filteredData)
+        } else if (!search && socket?.connected === true)  socket.on("newUserResponse", data => setUserData(data))
+        else if (!search && socket?.connected === false) setUserData(messageData?.data);
+    }, [messageData?.data, search, socket, userData])
+    
   return (
     <div className='chat__sidebar'>
         <div className='chat__footer'>
@@ -26,13 +33,13 @@ const ChatBar = ({messages, messageData, typingStatus, lastMessageRef, socket}) 
                 />
             </form>
         </div>
-        <div>
-            <h4  className='chat__header'>{users?.length > 0 ? `${users?.length || 0} Participants` :  `${messageData?.data?.length || 0} Participants`}</h4>
+        <div className="px-[10px]">
+            <h4  className='chat__header'>{userData?.length > 0 && `${userData?.length || 0} Participants`}</h4>
             <div className='chat__users'>
-                {users?.length > 0 
-                ? users.map(user => <p key={user.socketID}>{user.userName}</p>)
-                : messageData?.data?.map(user => <p key={user.id}>{user.owner.firstName}</p>)
-            }
+                {userData?.map((user, id) => socket?.connected 
+                    ? <p key={id}>{user.userName}</p>
+                    : <p key={id}>{user.owner.firstName}</p>
+                )}
             </div>
         </div>
   </div>

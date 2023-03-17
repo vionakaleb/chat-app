@@ -11,13 +11,14 @@
   font-family: 'Poppins', sans-serif;
 }
 .home__container {
-  width: 80%;
   margin: 0 auto;
   height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  background: url("https://images.pexels.com/photos/255379/pexels-photo-255379.jpeg");
+  background-size: cover;
 }
 .home__container > * {
   margin-bottom: 10px;
@@ -48,7 +49,8 @@
 }
 .chat__sidebar {
   height: 100%;
-  background-color: #FFFFFF;
+  background: url("https://images.pexels.com/photos/255379/pexels-photo-255379.jpeg");
+  background-size: cover;
   flex: 0.2;
   padding: 20px;
   border-right: 1px solid #BDBDBD;
@@ -101,7 +103,6 @@
 }
 .chat__footer {
   padding: 10px;
-  background-color: #FFFFFF;
   height: 10vh;
 }
 .form {

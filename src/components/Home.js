@@ -13,15 +13,16 @@ const Home = ({socket}) => {
     }
   return (
     <form className='home__container' onSubmit={handleSubmit}>
-        <h1 className="!text-[#607EAA] text-[1.5rem] !mb-[1.5rem]">Chat App</h1>
+        <h1 className="!text-[#607EAA] text-[2rem]">Chat App</h1>
+        <h4 className="!text-[#607EAA] text-[0.8rem] !mb-[3rem]">by. vionakaleb</h4>
 
         <label htmlFor="username">Username</label>
         <input type="text" 
         minLength={3} 
         name="username" 
         id='username'
-        className='username__input border-[1px] border-[solid] border-[#BDBDBD] !rounded !mb-[1.5rem]' 
-        value={userName} 
+        className='username__input border-[1px] border-[solid] border-[#BDBDBD] !rounded !mb-[3rem] text-center' 
+        defaultValue={userName || "User"} 
         onChange={e => setUserName(e.target.value)}
         />
         <button className='home__cta'>Sign in</button>
