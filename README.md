@@ -1,6 +1,6 @@
-# Chat App using React & Socket.IO
+# Chat App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app) and [Socket.IO](https://socket.io/).
 
 ## Live Demo
 
