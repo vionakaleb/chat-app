@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "https://vionakaleb.github.io/chat-app/static/css/main.a4f013c0.css",
-    "main.js": "https://vionakaleb.github.io/chat-app/static/js/main.9a89358e.js",
+    "main.css": "https://vionakaleb.github.io/chat-app/static/css/main.1b1df941.css",
+    "main.js": "https://vionakaleb.github.io/chat-app/static/js/main.251184ef.js",
     "static/js/787.6f726199.chunk.js": "https://vionakaleb.github.io/chat-app/static/js/787.6f726199.chunk.js",
     "index.html": "https://vionakaleb.github.io/chat-app/index.html",
-    "main.a4f013c0.css.map": "https://vionakaleb.github.io/chat-app/static/css/main.a4f013c0.css.map",
-    "main.9a89358e.js.map": "https://vionakaleb.github.io/chat-app/static/js/main.9a89358e.js.map",
+    "main.1b1df941.css.map": "https://vionakaleb.github.io/chat-app/static/css/main.1b1df941.css.map",
+    "main.251184ef.js.map": "https://vionakaleb.github.io/chat-app/static/js/main.251184ef.js.map",
     "787.6f726199.chunk.js.map": "https://vionakaleb.github.io/chat-app/static/js/787.6f726199.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.a4f013c0.css",
-    "static/js/main.9a89358e.js"
+    "static/css/main.1b1df941.css",
+    "static/js/main.251184ef.js"
   ]
 }
