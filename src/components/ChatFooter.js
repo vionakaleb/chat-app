@@ -1,23 +1,25 @@
 import React, {useState} from 'react'
 
 const ChatFooter = ({socket}) => {
-    const [message, setMessage] = useState("")
-    const handleTyping = () => socket.emit("typing",`${localStorage.getItem("userName")} is typing`)
+  const [message, setMessage] = useState("")
+  const handleTyping = () => socket.emit("typing",`${localStorage.getItem("userName")} is typing`)
 
-    const handleSendMessage = (e) => {
-        e.preventDefault()
-        if(message.trim() && localStorage.getItem("userName")) {
-        socket.emit("message", 
-            {
-            text: message, 
-            name: localStorage.getItem("userName"), 
-            id: `${socket.id}${Math.random()}`,
-            socketID: socket.id
-            }
-        )
-        }
-        setMessage("")
+  const handleSendMessage = (e) => {
+    e.preventDefault()
+    if(message.trim() && localStorage.getItem("userName")) {
+      socket.emit("message", 
+          {
+          text: message, 
+          name: localStorage.getItem("userName"), 
+          id: `${socket.id}${Math.random()}`,
+          socketID: socket.id
+          }
+      )
+    } else {
+      alert("Error: Connect to server to send message.")
     }
+    setMessage("")
+  }
   return (
     <div className='chat__footer'>
         <form className='form' onSubmit={handleSendMessage}>

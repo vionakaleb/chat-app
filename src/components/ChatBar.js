@@ -34,14 +34,17 @@ const ChatBar = ({messages, messageData, typingStatus, lastMessageRef, socket}) 
             </form>
         </div>
         <div className="px-[10px]">
-            <h4  className='chat__header'>{userData?.length > 0 && `${userData?.length || 0} Participants`}</h4>
+            <h4  className='chat__header'>{userData?.length > 0 ? `${userData?.length} participants` : "0 participant"}</h4>
             <div className='chat__users'>
                 {userData?.map((user, id) => socket?.connected 
                     ? <p key={id}>{user.userName}</p>
-                    : <p key={id}>{user.owner.firstName}</p>
+                    : user?.owner?.firstName
+                    ? <p key={id}>{user.owner.firstName}</p>
+                    : <p>No data.</p>
                 )}
             </div>
         </div>
+        <a style={{position: 'absolute', bottom: '3vh'}} target="_blank" href="https://vionakaleb.github.io/me" rel="noreferrer">&nbsp;&#169; https://vionakaleb.github.io/me</a>
   </div>
   )
 }

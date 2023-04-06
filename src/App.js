@@ -12,9 +12,8 @@ function App() {
             <Route path="/chat-app" element={<Home socket={socket}/>}></Route>
             <Route path="/chat-app/chat" element={<ChatPage socket={socket}/>}></Route>
           </Routes>
-    </div>
+        </div>
     </BrowserRouter>
-    
   );
 }
 

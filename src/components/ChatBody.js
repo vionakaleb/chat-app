@@ -32,16 +32,16 @@ const ChatBody = ({messages, messageData, typingStatus, lastMessageRef, socket})
                 ? userData?.map((user, id) => socket?.connected 
                   ? <label key={id}>{userData?.length > 1 ? `${user.userName}, ` : user.userName}</label>
                   : <label key={id}>{userData?.length > 1 ? `${user.owner.firstName}, ` : user.owner.firstName}</label>
-              ) : <label>User</label>}
+              ) : <label>No data.</label>}
           </div>
-          <h4 className='text-[#333333] text-[10px]'>{userData?.length > 0 && `${userData?.length || 0} Participants`}</h4>
+          <h4 className='text-[#333333] text-[10px]'>{userData?.length > 0 ? `${userData?.length} participants` : "0 participant"}</h4>
         </div>
         <button className='cursor-pointer' onClick={handleLeaveChat}>
           <AiOutlineClose className='w-[14px]' />
         </button>
       </header>
 
-      <div className='message__container'>
+      <div className={(messages?.length > 0 || messageData?.data?.length > 0) ? "message__container" : "message__container flex"}>
         {messages?.length > 0 
         ? messages.map(message => (
           message.name === localStorage.getItem("userName") ? (
@@ -52,7 +52,8 @@ const ChatBody = ({messages, messageData, typingStatus, lastMessageRef, socket})
                   <p className='!text-[#4F4F4F] !text-[9px]'>{moment(message.timestamp).format('HH:mm')}</p>
               </div>
             </div>
-          ): (
+          ) 
+          : (
             <div className="message__chats" key={message.id}>
               <p className='capitalize !text-[#E5A443]'>{message.name}</p>
               <div className='message__recipient !rounded !bg-[#FCEED3]'>
@@ -62,7 +63,8 @@ const ChatBody = ({messages, messageData, typingStatus, lastMessageRef, socket})
             </div>
           )
           ))
-          : messageData?.data?.map(message => (
+          : messageData?.data?.length > 0
+          ? messageData?.data?.map(message => (
               <div className="message__chats" key={message.id}>
                 <p className='capitalize !text-[#E5A443]'>{message.owner.firstName}</p>
                 <div className={`message__recipient !rounded !bg-[#FCEED3]`}>
@@ -71,6 +73,7 @@ const ChatBody = ({messages, messageData, typingStatus, lastMessageRef, socket})
                 </div>
               </div>
             ))
+          : <div className="!text-[#4F4F4F]" style={{margin: "auto"}}>No data.</div>
         }
 
         <div className='message__status'>
