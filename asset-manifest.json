@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/static/css/main.09c5eb16.css",
-    "main.js": "/static/js/main.905fb6eb.js",
-    "static/js/787.0c85c81b.chunk.js": "/static/js/787.0c85c81b.chunk.js",
-    "index.html": "/index.html",
-    "main.09c5eb16.css.map": "/static/css/main.09c5eb16.css.map",
-    "main.905fb6eb.js.map": "/static/js/main.905fb6eb.js.map",
-    "787.0c85c81b.chunk.js.map": "/static/js/787.0c85c81b.chunk.js.map"
+    "main.css": "https://vionakaleb.github.io/chat-app/static/css/main.09c5eb16.css",
+    "main.js": "https://vionakaleb.github.io/chat-app/static/js/main.ee56fd27.js",
+    "static/js/787.6f726199.chunk.js": "https://vionakaleb.github.io/chat-app/static/js/787.6f726199.chunk.js",
+    "index.html": "https://vionakaleb.github.io/chat-app/index.html",
+    "main.09c5eb16.css.map": "https://vionakaleb.github.io/chat-app/static/css/main.09c5eb16.css.map",
+    "main.ee56fd27.js.map": "https://vionakaleb.github.io/chat-app/static/js/main.ee56fd27.js.map",
+    "787.6f726199.chunk.js.map": "https://vionakaleb.github.io/chat-app/static/js/787.6f726199.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.09c5eb16.css",
-    "static/js/main.905fb6eb.js"
+    "static/js/main.ee56fd27.js"
   ]
 }
