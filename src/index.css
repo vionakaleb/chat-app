@@ -59,6 +59,21 @@
   height: 100%;
   flex: 0.8;
 }
+.responsive__text {
+  font-size: inherit;
+}
+@media screen and (max-width: 500px) {
+  .chat__sidebar {
+    display: none;
+  }
+  .chat__main {
+    height: 100%;
+    flex: auto;
+  }
+  .responsive__text {
+    font-size: xx-small !important;
+  }
+}
 .chat__header {
   margin: 30px 0 20px 0;
 }

@@ -37,9 +37,9 @@ const ChatBar = ({messages, messageData, typingStatus, lastMessageRef, socket}) 
             <h4  className='chat__header'>{userData?.length > 0 ? `${userData?.length} participants` : "0 participant"}</h4>
             <div className='chat__users'>
                 {userData?.map((user, id) => socket?.connected 
-                    ? <p key={id}>{user.userName}</p>
+                    ? <p key={id} className="responsive__text">{user.userName}</p>
                     : user?.owner?.firstName
-                    ? <p key={id}>{user.owner.firstName}</p>
+                    ? <p key={id} className="responsive__text">{user.owner.firstName}</p>
                     : <p>No data.</p>
                 )}
             </div>

@@ -30,8 +30,8 @@ const ChatBody = ({messages, messageData, typingStatus, lastMessageRef, socket})
           <div className='text-[#2F80ED] text-[15px] mb-[9px]'>
               {userData?.length > 0 
                 ? userData?.map((user, id) => socket?.connected 
-                  ? <label key={id}>{userData?.length > 1 ? `${user.userName}, ` : user.userName}</label>
-                  : <label key={id}>{userData?.length > 1 ? `${user.owner.firstName}, ` : user.owner.firstName}</label>
+                  ? <label key={id} className="responsive__text">{userData?.length > 1 ? `${user.userName}, ` : user.userName}</label>
+                  : <label key={id} className="responsive__text">{userData?.length > 1 ? `${user.owner.firstName}, ` : user.owner.firstName}</label>
               ) : <label>No data.</label>}
           </div>
           <h4 className='text-[#333333] text-[10px]'>{userData?.length > 0 ? `${userData?.length} participants` : "0 participant"}</h4>
